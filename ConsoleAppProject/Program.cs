@@ -25,10 +25,8 @@ namespace ConsoleAppProject
             Console.WriteLine("        by Tayyib Fazal                           ");
             Console.WriteLine(" =================================================");
             Console.WriteLine();
-
             DistanceConverter converter = new DistanceConverter();
-            converter.Run();
-            Console.WriteLine("Hello!");
+            converter.ConvertDistance();
         }
         
     }
