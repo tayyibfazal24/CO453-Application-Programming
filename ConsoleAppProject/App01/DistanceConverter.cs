@@ -10,5 +10,9 @@ namespace ConsoleAppProject.App01
     /// </author>
     public class DistanceConverter
     {
+        public void Run()
+        {
+
+        }
     }
 }
