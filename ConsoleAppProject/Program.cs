@@ -25,6 +25,12 @@ namespace ConsoleAppProject
             Console.WriteLine("        by Tayyib Fazal                           ");
             Console.WriteLine(" =================================================");
             Console.WriteLine();
+
+            DistanceConverter converter = new DistanceConverter();
+            
+            converter.MilesToFeet();
+            converter.FeetToMiles();
+            converter.MilesToMetres();
         }
         
     }
