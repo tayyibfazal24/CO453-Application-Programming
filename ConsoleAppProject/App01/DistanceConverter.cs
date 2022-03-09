@@ -15,76 +15,111 @@ namespace ConsoleAppProject.App01
         
         public const double METRES_IN_MILES = 1609.34;
         
-        private double miles;
+        public const double FEET_IN_METRES = 3.28084;
 
-        private double feet;
+        private double fromDistance;
+        private double toDistance;
+        private string fromUnit;
+        private string toUnit;
 
-        private double metres;
-
-        public void MilesToFeet()
+        public DistanceConverter()
         {
-            OutputHeading("Converting Miles to Feet");
-            InputMiles();
-            CalculateFeet();
-            OutputFeet();
-        }
-        public void FeetToMiles()
-        {
-            OutputHeading("Converting Feet to Miles");
-            InputFeet();
-            CalculateMiles();
-            OutputMiles();
+            fromUnit = MILES;
+            toUnit = FEET;
         }
 
-        public void MilesToMetres()
+        public const string FEET = "Feet";
+        public const string METRES = "Metres";
+        public const string MILES = "Miles";
+//----------------------------------------------------------------------------------------------------//
+        public void ConvertDistance()
         {
-            OutputHeading("Converting Miles to Metres");
-            InputMiles();
-            CalculateMetres();
-            OutputMetres();
+            fromUnit = SelectUnit("Please select the from distance unit: ");
+            toUnit = SelectUnit("Please select the to distance unit: ");
+            OutputHeading($"Converting {fromUnit} to {toUnit}");
+            fromDistance = InputDistance($"Please enter the number of {fromUnit}: ");
+            CalculateDistance();        
+            OutputDistance();
         }
-        
-        private void InputMiles()
+
+        private void CalculateDistance()
         {
-            Console.Write("Please enter the number of miles: ");
+            if(fromUnit == MILES && toUnit == FEET)
+            {
+                toDistance = fromDistance * FEET_IN_MILES;
+            }
+            else if (fromUnit == FEET && toUnit == MILES)
+            {
+                toDistance = fromDistance / FEET_IN_MILES;
+            }
+            else if (fromUnit == MILES && toUnit == METRES)
+            {
+                toDistance = fromDistance / METRES_IN_MILES;
+            }
+            else if (fromUnit == METRES && toUnit == MILES)
+            {
+                toDistance = fromDistance * METRES_IN_MILES;
+            }
+            else if (fromUnit == FEET && toUnit == METRES)
+            {
+                toDistance = fromDistance * FEET_IN_METRES;
+            }
+            else if (fromUnit == METRES && toUnit == FEET)
+            {
+                toDistance = fromDistance / METRES_IN_MILES;
+            }
+        }
+
+//----------------------------------------------------------------------------------------------------//
+
+        private string SelectUnit(string prompt)
+        {
+            string choice = DisplayChoices(prompt);
+            return ExecuteChoice(choice);
+        }
+
+        private static string ExecuteChoice(string choice)
+        {
+            
+            if(choice.Equals("1"))
+            {
+                return FEET;
+            }
+            else if (choice.Equals("2"))
+            {
+                return METRES;
+            }
+            else if (choice.Equals("3"))
+            {
+                return MILES;
+            }
+
+            return null;
+        }
+
+        private static string DisplayChoices(string prompt)
+        {
+            Console.WriteLine();
+            Console.WriteLine($" 1. {FEET}");
+            Console.WriteLine($" 2. {METRES}");
+            Console.WriteLine($" 3. {MILES}");
+            Console.WriteLine();
+
+            Console.Write(prompt);
+            string choice = Console.ReadLine();
+            return choice;
+        }
+//----------------------------------------------------------------------------------------------------//
+        private double InputDistance(string prompt)
+        {
+            Console.Write(prompt);
             string value = Console.ReadLine();
-            miles = Convert.ToDouble(value);
+            return Convert.ToDouble(value);
         }
-        private void InputFeet()
+        private void OutputDistance()
         {
-            Console.Write("Please enter the number of feet: ");
-            string value = Console.ReadLine();
-            feet = Convert.ToDouble(value);
-        }
-
-        private void CalculateFeet()
-        {
-            feet = miles * FEET_IN_MILES;
-        }
-
-        private void CalculateMiles()
-        {
-            miles = feet / FEET_IN_MILES;
-        }
-
-        private void CalculateMetres()
-        {
-            metres = miles * METRES_IN_MILES;
-        }
-
-        private void OutputFeet()
-        {
-            Console.WriteLine(miles + " miles is " + feet + " feet");
-        }
-
-        private void OutputMiles()
-        {
-            Console.WriteLine(feet + " feet is " + miles + " miles");
-        }
-
-        private void OutputMetres()
-        {
-            Console.WriteLine(miles + " miles is " + metres + " metres");
+            Console.WriteLine($" {fromDistance} {fromUnit}" +
+            $" is {toDistance} {toUnit}");
         }
 
         private void OutputHeading(String prompt)
