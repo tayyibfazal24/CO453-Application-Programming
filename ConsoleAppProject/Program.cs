@@ -1,7 +1,4 @@
-﻿using ConsoleAppProject.App01;
-using ConsoleAppProject.App02;
-using ConsoleAppProject.App03;
-using ConsoleAppProject.App04;
+﻿using ConsoleAppProject.App04;
 using ConsoleAppProject.Helpers;
 using System;
 
@@ -35,10 +32,6 @@ namespace ConsoleAppProject
             Console.WriteLine("               BMI Calculator   - 2.              ");
             Console.WriteLine(" =================================================");
             Console.WriteLine();
-
-            DistanceConverter converter = new DistanceConverter();
-            BMI bmi = new BMI();
-            converter.ConvertDistance();
         }
         
     }
